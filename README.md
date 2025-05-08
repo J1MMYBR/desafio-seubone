@@ -70,6 +70,24 @@ Este repositório contém o desafio de Análise de Dados proposto pela SeuBoné,
 
 ---
 
+## Principais Funções
+Estão listadas abaixo as funções-chave implementadas e seu propósito geral:
+
+| Função                                                | Descrição                                                                                                                |
+|-------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------|
+| `lerEFiltrar(input_path, output_path, table_name)`    | Lê um arquivo CSV de `input_path`, aplica filtros de qualidade e grava na tabela SQLite `table_name` em `output_path`.   |
+| `printInfo(df)`                                       | Exibe informações gerais do DataFrame `df`, incluindo número de linhas, tipos de colunas e quantidade de valores nulos.  |
+| `peneira(df, crit, desc)`                             | Filtra o DataFrame `df` com base no critério `crit` e registra `desc` para logs.                                         |
+| `filtro(df)`                                          | Aplica filtros gerais (ex.: ano, UFs válidas) ao DataFrame `df`.                                                         |
+| `filtroIMP(df)`                                       | Aplica filtros específicos para dados de importação no DataFrame `df`.                                                   |
+| `printInvalidos()`                                    | Imprime ou registra as linhas descartadas por violarem regras de qualidade definidas.                                    |
+| `carregarDBs()`                                       | Conecta e lê as tabelas SQLite em `database/`, retornando uma lista de DataFrames.                                       |
+| `calcularTop3(df)`                                    | Agrupa o DataFrame `df` por ano, estado e produto, soma valores e retorna as 3 maiores entradas por estado/ano.          |
+| `gerarESalvarTop3(top3_20, top3_21, fluxo, pathHtml)` | Gera gráficos comparativos de Top 3 (2020 vs 2021) para importação ou exportação e salva em HTML.                        |
+| `gerarESalvarTopMes(df, pathHtml)`                    | Gera um gráfico com o Top 3 de produtos exportados por estado, mês a mês em 2021, e salva em HTML.                       |
+
+---
+
 ## Links Úteis
 
 - [Informações sobre layout de dados](https://www.gov.br/produtividade-e-comercio-exterior/pt-br/assuntos/comercio-exterior/estatisticas/base-de-dados-bruta
