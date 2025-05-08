@@ -9,10 +9,10 @@ UFS = [
 
 INVALIDOS = {}
 
-def lerEFiltrar(INPUT_PATH, OUTPUT_PATH, TABLE_NAME):
+def lerEFiltrar(input_path, output_path, table_name):
 
     df = pd.read_csv(
-        INPUT_PATH,
+        input_path,
         sep=';',
         quotechar='"'
         )
@@ -23,10 +23,10 @@ def lerEFiltrar(INPUT_PATH, OUTPUT_PATH, TABLE_NAME):
     df['CO_NCM'] = df['CO_NCM'].astype(str).str.zfill(8)
     df['CO_URF'] = df['CO_URF'].astype(str).str.zfill(7)
 
-    print("---- Antes do Filtro ----")
+    print("\n\n---- Antes do Filtro ----")
     printInfo(df)
 
-    if 'IMP' in INPUT_PATH:
+    if 'IMP' in input_path:
         df = filtro(df)
         df = filtroIMP(df)
     else:
@@ -36,17 +36,18 @@ def lerEFiltrar(INPUT_PATH, OUTPUT_PATH, TABLE_NAME):
     printInfo(df)
     printInvalidos()
 
-    conn = sqlite3.connect(OUTPUT_PATH)
-    df.to_sql(TABLE_NAME, conn, if_exists='replace', index=False)
+    conn = sqlite3.connect(output_path)
+    df.to_sql(table_name, conn, if_exists='replace', index=False)
     conn.close()
 
 def printInfo(df):
-    print("---- Informacoes ----\n")
+    print("---- Informacoes ----")
     df.info()
 
-    print("---- Valores Nulos ----\n")
+    print("\n\n---- Valores Nulos ----\n")
     nulos = df.isnull().sum()
     print("Nulos por coluna:\n", nulos)
+    print("\n")
 
 def peneira(df, crit, desc):
     antes = len(df)
@@ -57,7 +58,7 @@ def peneira(df, crit, desc):
     return dfFiltrada
 
 def filtro(df):
-    print("---- Iniciando Filtros ----\n")
+    print("---- Iniciando Filtros ----")
 
     # filtrar mes
     crit = df['CO_MES'].between(1, 12)
@@ -109,11 +110,19 @@ def printInvalidos():
         print(f"- {desc:25s}: {qnt}")
 
 def main():
-    INPUT_PATH = 'inputs/IMP_2021.csv'
-    OUTPUT_PATH = 'database/IMP_2021.db'
-    TABLE_NAME = 'IMP_2021'
+    operacoes = ["IMP", "EXP"]
+    anos = ["2020", "2021"]
 
-    lerEFiltrar(INPUT_PATH, OUTPUT_PATH, TABLE_NAME)
+    for operacao in operacoes:
+        for ano in anos:
+            INVALIDOS.clear()
+            input_path = f"inputs/{operacao}_{ano}.csv"
+            output_path = f"database/{operacao}_{ano}.db"
+            table_name = f"{operacao}_{ano}"
+
+            print(f"====== Inicio para {table_name} ======")
+            lerEFiltrar(input_path, output_path, table_name)
+            print(f"====== Fim para {table_name} ======\n\n")
 
 if __name__ == "__main__":
     main()

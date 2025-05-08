@@ -11,7 +11,7 @@ exp_20 = pd.read_csv(
     )
 
 exp_20.to_csv(
-    'inputs/menorEXP2020.csv',
+    'inputs/menorEXP_2020.csv',
     sep=';',
     index=False,
     quotechar='"',
@@ -28,7 +28,7 @@ exp_21 = pd.read_csv(
     )
 
 exp_21.to_csv(
-    'inputs/menorEXP2021.csv',
+    'inputs/menorEXP_2021.csv',
     sep=';',
     index=False,
     quotechar='"',
@@ -45,7 +45,7 @@ imp_20 = pd.read_csv(
     )
 
 imp_20.to_csv(
-    'inputs/menorIMP2020.csv',
+    'inputs/menorIMP_2020.csv',
     sep=';',
     index=False,
     quotechar='"',
@@ -62,13 +62,13 @@ imp_21 = pd.read_csv(
     )
 
 imp_21.to_csv(
-    'inputs/menorIMP2021.csv',
+    'inputs/menorIMP_2021.csv',
     sep=';',
     index=False,
     quotechar='"',
     quoting=csv.QUOTE_ALL
     )
 
-# cria outros arquivos .csv com 50k linhas para melhor manipulacao em testes
+# apenas um algoritmo auxiliar. cria outros arquivos .csv com 50k linhas para melhor manipulacao em testes
 
 print(f"Operacao concluida com sucesso, 4 arquivos com {len(imp_20)} linhas salvas.")
